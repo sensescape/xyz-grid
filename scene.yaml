@@ -383,7 +383,7 @@ layers:
                     style: grid-buildings
                 lines:
                     visible: true
-                    color: [0.700,0.700,0.700]
+                    color: [0.650,0.650,0.650]
                     width: 1px
 
 styles:
@@ -451,7 +451,7 @@ styles:
                         return (grid.x < res * press) || (grid.y < res * press);
                     }
                     float TileGrid(float res) {
-                        vec2 st = TileCoords() * 320. * res;
+                        vec2 st = TileCoords() * 200. * res;
                         float pct = 0.0;
                         float press = 0.6 + (1.0 - fract(u_map_position.z)) * 0.1;
                         if (grid(st, 0.1, press)) { pct += 0.5; }
@@ -473,9 +473,9 @@ styles:
                         return (grid.x < res * press) || (grid.y < res * press);
                     }
                     float TileGrid(float res) {
-                        vec2 st = TileCoords() * 480. * res;
+                        vec2 st = TileCoords() * 400. * res;
                         float pct = 0.0;
-                        float press = 0.8 + (1.0 - fract(u_map_position.z)) * 0.1;
+                        float press = 0.9 + (1.0 - fract(u_map_position.z)) * 0.1;
                         if (grid(st, 0.1, press)) { pct += 0.5; }
                         return pct;
                     }
@@ -483,6 +483,16 @@ styles:
                         return mix(TileGrid(1.), TileGrid(2.), fract(u_map_position.z));
                     }
                     #endif
+
+    grid-earth2:
+        base: polygons
+        mix: [space-constant, patterns-grid]
+        shaders:
+            blocks:
+                color: |
+                    vec2 st = getConstantCoords();
+                    color.rgb = vec3(1.00,1.00,1.00);
+                    color.rgb = mix(color.rgb, vec3(0.100,0.100,0.100), tileGrid());
     grid-earth:
         base: polygons
         mix: tools-grid2
@@ -490,7 +500,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.000,0.000,0.000), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.530,0.530,0.530), TileGrid());
 
     grid-buildings:
         base: polygons
@@ -499,7 +509,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.700,0.700,0.700), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.830,0.830,0.830), TileGrid());
 
     grid-water:
         base: polygons
@@ -508,7 +518,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.400,0.400,0.400), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.850,0.850,0.850), TileGrid());
 
     grid-green:
         base: polygons
@@ -517,8 +527,97 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.000,0.000,0.000), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.570,0.570,0.570), TileGrid());
     
-    polygons_transparent:
-        base: polygons
-        blend: overlay
+    patterns-grid:
+        doc:
+            author: 
+                name: Patricio Gonzalez Vivo
+                twitter: patriciogv
+            version: 0.0.1
+            tangram-version: 0.0.7
+            licence: MIT
+            description: |  
+                Collection of functions to draw grids. To learn more about patterns check [this chapter from the Book of Shaders](https://thebookofshaders.com/09/)    
+            examples:
+                blueprint:
+                    url: https://tangrams.github.io/tangram-sandbox/styles/blueprint.yaml
+                    img: https://tangrams.github.io/tangram-sandbox/styles/blueprint.png
+                    lines: 75-76
+                grain:
+                    url: https://tangrams.github.io/tangram-sandbox/styles/grain.yaml
+                    img: https://tangrams.github.io/tangram-sandbox/styles/grain.png
+                    lines: 15
+        mix: [space-tile]
+        shaders:
+            blocks:
+                global: |
+                    // Draw a grid in the space a specific resolution and pressition
+                    bool grid (vec2 st, float res, float press) {
+                        vec2 grid = fract(st*res);
+                        return grid.x < res*press || grid.y < res*press;
+                    }
+                    //
+                    // Draw a grid in the space a specific resolution
+                    bool grid (vec2 st, float res) {
+                        return grid(st, res, 1.0);
+                    }
+
+                    //
+                    // Draw a grid in 45 degress with a specific width
+                    float diagonalGrid(vec2 st, float width){
+                        return step(.5,max( smoothstep(st.x-width,st.x,st.y)*(1.-smoothstep(st.x,st.x+width,st.y)),
+                                            smoothstep(st.x-width,st.x,1.0-st.y)*(1.-smoothstep(st.x,st.x+width,1.0-st.y))));
+                    }
+
+                    // Draw a grid using tile coordenates in a specific resolution
+                    float tileGrid (float res) {
+                        vec2 st = getTileCoords()*320.*res;
+                        float pct = 0.0;
+                        float press = 0.6;
+                        //float press = 0.6+(1.0-fract(u_map_position.z))*0.1;
+                        if (grid(st,0.1,press)) pct += 0.5;
+                        return pct;
+                    }
+
+                    // Draw two grid that smoothly interpolates acording to zooms
+                    float tileGrid() { 
+                        return mix(tileGrid(1.),tileGrid(1.),fract(u_map_position.z)); 
+                    }
+
+    space-tile:
+        doc:
+            author: 
+                name: Patricio Gonzalez Vivo
+                twitter: patriciogv
+            version: 0.0.1
+            tangram-version: 0.0.7
+            licence: MIT
+            description: |
+                Get the position on the tile
+        test:
+            tile: 
+                defines:
+                    v_pos: 'v_texcoord'
+                blocks:
+                    color: |
+                        vec2 st = getTileCoords();
+                        color.rg += fract(st*3.);
+        shaders:
+            blocks:
+                global: |
+                    // Variant to be add to both vertex and fragments shaders
+                    #ifndef v_pos
+                    varying vec3 v_pos;
+                    #endif
+
+                    //
+                    // Get the coordinates in tile space
+                    // ================================
+                    vec2 getTileCoords() {
+                        return fract(v_pos.xy);
+                    }
+
+                position: |
+                    // Normalize the attribute position of a vertex
+                    v_pos = modelPosition().xyz;
