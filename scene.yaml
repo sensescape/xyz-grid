@@ -301,12 +301,6 @@ layers:
                     lines:
                         color: [1.000,1.000,1.000]
                         width: [[12, 1.0px], [14, 1.5px], [15, 3px], [16, 5m]]
-            ferry:
-                filter: { kind: ferry }
-                draw:
-                    lines:
-                        color: red
-                        width: 1px
 
         highway:
             filter: { kind: highway, $zoom: { min: 8 } }
@@ -393,6 +387,25 @@ layers:
                     width: 1px
 
 styles:
+    space-constant:
+        shaders:
+            blocks:
+                global: |
+                    // Get the constant coordinates (glitches on zooms)
+                    // ================================
+                    vec2 getConstantCoords () {
+                        #ifdef TANGRAM_FRAGMENT_SHADER
+                        const float pixel_scale = 695.;
+                        float meter_pixels = u_meters_per_pixel / u_device_pixel_ratio;
+                        vec2 st = gl_FragCoord.xy/pixel_scale;
+                        const float dot_wrap = 1000.;
+                        st += mod(u_map_position.xy / meter_pixels, dot_wrap)/pixel_scale;
+                        return st;
+                        #else
+                        return vec2(0.0,0.0);
+                        #endif
+                    }
+
     tools-tilecoords:
         shaders:
             blocks:
@@ -472,7 +485,7 @@ styles:
                     #endif
     grid-earth:
         base: polygons
-        mix: [tools-grid2]
+        mix: tools-grid2
         shaders:
             blocks:
                 filter: |
