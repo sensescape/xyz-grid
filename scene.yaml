@@ -384,7 +384,7 @@ layers:
                 lines:
                     visible: true
                     color: [0.650,0.650,0.650]
-                    width: 1px
+                    width: [[12,0.5px], [18,2px]]
 
 styles:
     space-constant:
