@@ -383,8 +383,8 @@ layers:
                     style: grid-buildings
                 lines:
                     visible: true
-                    color: [[12,[0.950,0.950,0.950]], [18,[0.670,0.670,0.670]]]
-                    width: [[12,0.5px], [18,2px]]
+                    color: [[12,[0.800,0.800,0.800]], [20,[0.660,0.660,0.660]]]
+                    width: [[12,0.5px], [15,1px], [18,2px]]
 
 styles:
     space-constant:
@@ -500,7 +500,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.480,0.480,0.480), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.510,0.510,0.510), TileGrid());
 
     grid-buildings:
         base: polygons
@@ -509,7 +509,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.830,0.830,0.830), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.850,0.850,0.850), TileGrid());
 
     grid-water:
         base: polygons
@@ -518,7 +518,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.850,0.850,0.850), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.870,0.870,0.870), TileGrid());
 
     grid-green:
         base: polygons
@@ -527,7 +527,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.500,0.500,0.500), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.540,0.540,0.540), TileGrid());
     
     patterns-grid:
         doc:
