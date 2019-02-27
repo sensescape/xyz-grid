@@ -86,7 +86,7 @@ layers:
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
-                    color: [0.740,0.740,0.740]
+                    color: [0.770,0.770,0.770]
                     width: 1px
                     visible: true
             us_national_park:
@@ -101,7 +101,7 @@ layers:
                         color: [0.300,0.300,0.300]
                         visible: true
                     lines:
-                        color: [0.740,0.740,0.740]
+                        color: [0.770,0.770,0.770]
                         width: 1px
                         visible: true
 
@@ -117,7 +117,7 @@ layers:
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
-                    color: [0.740,0.740,0.740]
+                    color: [0.770,0.770,0.770]
                     width: 1px
                     visible: true
 
@@ -134,7 +134,7 @@ layers:
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
-                    color: [0.740,0.740,0.740]
+                    color: [0.770,0.770,0.770]
                     width: 1px
                     visible: true
 
@@ -146,7 +146,7 @@ layers:
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
-                    color: [0.740,0.740,0.740]
+                    color: [0.770,0.770,0.770]
                     width: 1px
                     visible: true
 
@@ -383,7 +383,7 @@ layers:
                     style: grid-buildings
                 lines:
                     visible: true
-                    color: [[12,[0.800,0.800,0.800]], [20,[0.660,0.660,0.660]]]
+                    color: [[12,[0.800,0.800,0.800]], [20,[0.690,0.690,0.690]]]
                     width: [[12,0.5px], [15,1px], [18,2px]]
 
 styles:
@@ -500,7 +500,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.510,0.510,0.510), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.570,0.570,0.570), TileGrid());
 
     grid-buildings:
         base: polygons
@@ -509,7 +509,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.850,0.850,0.850), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.890,0.890,0.890), TileGrid());
 
     grid-water:
         base: polygons
@@ -527,7 +527,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.540,0.540,0.540), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.760,0.760,0.760), TileGrid());
     
     patterns-grid:
         doc:
