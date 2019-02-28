@@ -373,19 +373,19 @@ layers:
                         outline:
                             cap: butt
 
-        major_road:
-            filter: { kind: major_road, $zoom: { min: 17 } }
-            draw:
-                lines:
-                    color: [0.650,0.650,0.650]
-                    width: [[17,0px], [18,1px]]
+        # major_road:
+        #     filter: { kind: major_road, $zoom: { min: 17 } }
+        #     draw:
+        #         lines:
+        #             color: [0.650,0.650,0.650]
+        #             width: [[17,0px], [18,1px]]
 
-        minor_road:
-            filter: { kind: minor_road, not: { kind_detail: service }, $zoom: { min: 17 } }
-            draw:
-                lines:
-                    color: [0.650,0.650,0.650]
-                    width: [[17,0px], [18,1px]]
+        # minor_road:
+        #     filter: { kind: minor_road, not: { kind_detail: service }, $zoom: { min: 17 } }
+        #     draw:
+        #         lines:
+        #             color: [0.650,0.650,0.650]
+        #             width: [[17,0px], [18,1px]]
 
 
     buildings:
