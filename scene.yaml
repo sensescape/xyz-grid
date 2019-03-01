@@ -297,7 +297,7 @@ layers:
                     color: [1.000,1.000,1.000]
                     visible: true
                 lines:
-                    color: [0.880,0.880,0.880]
+                    color: [0.900,0.900,0.900]
                     width: 2px
                     visible: true
             us_national_park:
@@ -313,7 +313,7 @@ layers:
                         color: [0.300,0.300,0.300]
                         visible: true
                     lines:
-                        color: [0.880,0.880,0.880]
+                        color: [0.900,0.900,0.900]
                         width: 2px
                         visible: true
 
@@ -330,7 +330,7 @@ layers:
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
-                    color: [0.880,0.880,0.880]
+                    color: [0.900,0.900,0.900]
                     width: 2px
                     visible: true
 
@@ -348,7 +348,7 @@ layers:
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
-                    color: [0.880,0.880,0.880]
+                    color: [0.900,0.900,0.900]
                     width: 2px
                     visible: true
 
@@ -361,7 +361,7 @@ layers:
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
-                    color: [0.880,0.880,0.880]
+                    color: [0.900,0.900,0.900]
                     width: 2px
                     visible: true
 
@@ -381,7 +381,7 @@ layers:
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
-                    color: [0.880,0.880,0.880]
+                    color: [0.900,0.900,0.900]
                     width: 2px
                     visible: true
             national_park:
