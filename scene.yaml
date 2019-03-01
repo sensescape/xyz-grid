@@ -59,7 +59,8 @@ layers:
         data: { source: xyz-osm, layer: earth }
         draw:
             polygons:
-                style: grid-earth
+                # style: grid-earth
+                style: earth-grid
                 order: global.feature_order
                 color: [1.000,1.000,1.000]
 
@@ -67,7 +68,8 @@ layers:
         data: { source: xyz-osm, layer: water }
         draw:
             polygons:
-                style: grid-water
+                # style: grid-water
+                style: water-grid
                 order: global.feature_order
                 color: [1.000,1.000,1.000]
 
@@ -290,7 +292,8 @@ layers:
                     - protect_class: ['2','3','5']
             draw:
                 polygons:
-                    style: grid-green
+                    # style: grid-green
+                    style: green-grid
                     color: [1.000,1.000,1.000]
                     visible: true
                 lines:
@@ -305,7 +308,8 @@ layers:
                         - protect_class: ['2','3','5']
                 draw:
                     polygons:
-                        style: grid-green
+                        # style: grid-green
+                        style: green-grid
                         color: [0.300,0.300,0.300]
                         visible: true
                     lines:
@@ -321,7 +325,8 @@ layers:
                 not: { protect_class: ['2','3','5']}
             draw:
                 polygons:
-                    style: grid-green
+                    # style: grid-green
+                    style: green-grid
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
@@ -338,7 +343,8 @@ layers:
                     - operator: ['United States Forest Service']
             draw:
                 polygons:
-                    style: grid-green
+                    # style: grid-green
+                    style: green-grid
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
@@ -350,7 +356,8 @@ layers:
             filter: { kind: [forest, natural_forest, wood, natural_wood, natural_park], $zoom: { min: 10 }, not: { operator: "United States Forest Service" } }
             draw:
                 polygons:
-                    style: grid-green
+                    # style: grid-green
+                    style: green-grid
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
@@ -369,7 +376,8 @@ layers:
             # default for national forests and more?
             draw:
                 polygons:
-                    style: grid-green
+                    # style: grid-green
+                    style: green-grid
                     color: [0.300,0.300,0.300]
                     visible: true
                 lines:
@@ -384,7 +392,8 @@ layers:
                         - not: [ protect_class: ['2','3','5','6'], operator: [ "United States National Park Service"] ]
                 draw:
                     polygons:
-                        style: grid-green
+                        # style: grid-green
+                        style: green-grid
                         visible: true
 
 
@@ -415,7 +424,8 @@ layers:
             draw:
                 polygons:
                     visible: true
-                    style: grid-buildings
+                    # style: grid-buildings
+                    style: building-grid
                 lines:
                     visible: true
                     color: [0.690,0.690,0.690]
@@ -518,6 +528,42 @@ styles:
                         return mix(TileGrid(1.), TileGrid(2.), fract(u_map_position.z));
                     }
                     #endif
+
+    earth-grid:
+        base: polygons
+        mix: tools-grid
+        shaders:
+            blocks:
+                filter: |
+                    color.rgb = vec3(1.00,1.00,1.00);
+                    color.rgb = mix(color.rgb, vec3(0.730,0.730,0.730), TileGrid());
+
+    water-grid:
+        base: polygons
+        mix: tools-grid2
+        shaders:
+            blocks:
+                filter: |
+                    color.rgb = vec3(1.00,1.00,1.00);
+                    color.rgb = mix(color.rgb, vec3(0.590,0.590,0.590), TileGrid());
+
+    green-grid:
+        base: polygons
+        mix: tools-grid3
+        shaders:
+            blocks:
+                filter: |
+                    color.rgb = vec3(1.00,1.00,1.00);
+                    color.rgb = mix(color.rgb, vec3(0.810,0.810,0.810), TileGrid());
+
+    building-grid:
+        base: polygons
+        mix: tools-grid
+        shaders:
+            blocks:
+                filter: |
+                    color.rgb = vec3(1.00,1.00,1.00);
+                    color.rgb = mix(color.rgb, vec3(0.900,0.900,0.900), TileGrid());
 
     grid-earth:
         base: polygons
