@@ -213,17 +213,17 @@ layers:
             filter: { kind: highway, $zoom: { min: 8 } }
             draw:
                 lines:
-                    color: [[5,[0.780,0.780,0.780]], [12,[1.000,1.000,1.000]]]
+                    color: [[5,[0.760,0.760,0.760]], [12,[1.000,1.000,1.000]]]
                     width: [[5, 0px], [8, 0.1px], [12, 0.1px], [14, 2px], [16, 6.5px], [17, 22m]]
                     outline:
-                        color: [[5,[0.780,0.780,0.780]], [14,[0.780,0.780,0.780]], [16,[0.600,0.600,0.600]]]
+                        color: [[5,[0.760,0.760,0.760]], [14,[0.760,0.760,0.760]], [16,[0.600,0.600,0.600]]]
                         width: [[5, 0px], [12, 0.5px], [14, 1px]]
 
             link:
                 filter: { is_link: true } # on- and off-ramps, etc
                 draw:
                     lines:
-                        color: [0.780,0.780,0.780]
+                        color: [0.760,0.760,0.760]
                         width: [[8, 0px], [13, 0px], [18, 2px]]
                         outline:
                             width: 0px
@@ -261,14 +261,14 @@ layers:
             filter: { kind: major_road, $zoom: { min: 13 } }
             draw:
                 lines:
-                    color: [0.780,0.780,0.780]
+                    color: [0.760,0.760,0.760]
                     width: [[13,0px], [18,2px]]
 
         minor_road:
             filter: { kind: minor_road, not: { kind_detail: service }, $zoom: { min: 16 } }
             draw:
                 lines:
-                    color: [0.780,0.780,0.780]
+                    color: [0.760,0.760,0.760]
                     width: [[16,0px], [18,2px]]
 
     landuse:
@@ -418,7 +418,7 @@ layers:
                     style: grid-buildings
                 lines:
                     visible: true
-                    color: [[12,[0.690,0.690,0.690]], [14,[0.690,0.690,0.690]], [20,[0.900,0.900,0.900]]]
+                    color: [0.690,0.690,0.690]
                     width: [[12,0.5px], [14,2px]]
 
 styles:
