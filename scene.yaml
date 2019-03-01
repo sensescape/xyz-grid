@@ -536,7 +536,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.735,0.698,0.728), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.770,0.732,0.764), TileGrid());
 
     water-grid:
         base: polygons
@@ -545,7 +545,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.610,0.580,0.605), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.660,0.634,0.656), TileGrid());
 
     green-grid:
         base: polygons
@@ -554,7 +554,7 @@ styles:
             blocks:
                 filter: |
                     color.rgb = vec3(1.00,1.00,1.00);
-                    color.rgb = mix(color.rgb, vec3(0.800,0.760,0.793), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.847,0.822,0.843), TileGrid());
 
     building-grid:
         base: polygons
