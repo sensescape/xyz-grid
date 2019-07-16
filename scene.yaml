@@ -232,7 +232,7 @@ layers:
             filter: { kind: highway, $zoom: { min: 8 } }
             draw:
                 lines:
-                    color: [[5,[0.644,0.672,0.700]], [12,[1.000,1.000,1.000]]]
+                    color: [[5,[0.644,0.672,0.700]], [12,[0.985,0.995,1.000]]]
                     width: [[5, 0px], [8, 0.1px], [12, 0.1px], [14, 2px], [16, 6.5px], [17, 22m]]
                     outline:
                         color: [[5,[0.644,0.672,0.700]], [14,[0.644,0.672,0.700]], [16,[0.573,0.613,0.630]]]
@@ -256,7 +256,7 @@ layers:
                     filter: {is_tunnel: true, $zoom: {min: 13} }
                     draw:
                         lines:
-                            color: [1.000,1.000,1.000]
+                            color: [0.985,0.995,1.000]
                             outline:
                                 color: [0.673,0.707,0.740]
 
@@ -264,7 +264,7 @@ layers:
                 filter: {is_tunnel: true, $zoom: {min: 13} }
                 draw:
                     lines:
-                        color: [1.000,1.000,1.000]
+                        color: [0.985,0.995,1.000]
                         outline:
                             color: [0.883,0.896,0.910]
 
@@ -415,7 +415,7 @@ layers:
             polygons:
                 visible: false
                 order: 329
-                color: [1.000,1.000,1.000]
+                color: [0.985,0.995,1.000]
             lines:
                 visible: false
                 order: 329
@@ -699,7 +699,7 @@ styles:
                         vec2 st = TileCoords() * 400. * res;
                         float pct = 0.0;
                         float press = 0.9 + (1.0 - fract(u_map_position.z)) * 0.1;
-                        if (grid(st, 0.1, press)) { pct += 0.15; }
+                        if (grid(st, 0.1, press)) { pct += 0.21; }
                         return pct;
                     }
                     float TileGrid() {
@@ -721,7 +721,7 @@ styles:
                         vec2 st = TileCoords() * 800. * res;
                         float pct = 0.0;
                         float press = 0.9 + (1.0 - fract(u_map_position.z)) * 0.1;
-                        if (grid(st, 0.1, press)) { pct += 0.15; }
+                        if (grid(st, 0.1, press)) { pct += 0.21; }
                         return pct;
                     }
                     float TileGrid() {
@@ -751,7 +751,7 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    color.rgb = mix(color.rgb, vec3(0.180,0.212,0.227), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.173,0.211,0.230), TileGrid());
 
     park-grid:
         base: polygons
@@ -759,7 +759,7 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    color.rgb = mix(color.rgb, vec3(0.180,0.212,0.227), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.182,0.227,0.250), TileGrid());
 
     building-grid:
         base: polygons
