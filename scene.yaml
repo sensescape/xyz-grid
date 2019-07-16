@@ -132,7 +132,7 @@ layers:
                 all:
                     - boundary: true
                     - not: { kind: ocean }
-                    - $zoom: { min: 8 }
+                    - $zoom: { min: 7 }
                 any:
                     # limit show smaller landuse areas to higher zooms
                     - { $zoom: [1],  area: { min: 10000000000 } }
@@ -735,7 +735,7 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    color.rgb = mix(color.rgb, vec3(0.761,0.773,0.784), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.684,0.702,0.720), TileGrid());
 
     water-grid:
         base: polygons
@@ -743,7 +743,7 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    color.rgb = mix(color.rgb, vec3(0.865,0.892,0.920), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.893,0.921,0.950), TileGrid());
 
     green-grid:
         base: polygons
@@ -751,7 +751,7 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    color.rgb = mix(color.rgb, vec3(0.173,0.211,0.230), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.113,0.191,0.230), TileGrid());
 
     park-grid:
         base: polygons
@@ -759,7 +759,7 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    color.rgb = mix(color.rgb, vec3(0.182,0.227,0.250), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.071,0.177,0.230), TileGrid());
 
     building-grid:
         base: polygons
