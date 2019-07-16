@@ -735,7 +735,7 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    color.rgb = mix(color.rgb, vec3(0.684,0.702,0.720), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.576,0.648,0.720), TileGrid());
 
     water-grid:
         base: polygons
@@ -759,7 +759,7 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    color.rgb = mix(color.rgb, vec3(0.071,0.177,0.230), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.044,0.168,0.230), TileGrid());
 
     building-grid:
         base: polygons
