@@ -792,7 +792,8 @@ layers:
                     - protect_class: ['2','3','5']
             draw:
                 polygons:
-                    style: green-grid
+                    style: circles-on-grid
+                    # style: green-grid
                     color: [0.985,0.995,1.000]
                     visible: true
                 lines:
@@ -807,7 +808,8 @@ layers:
                         - protect_class: ['2','3','5']
                 draw:
                     polygons:
-                        style: green-grid
+                        style: circles-on-grid
+                        # style: green-grid
                         color: [0.985,0.995,1.000]
                         visible: true
                     lines:
@@ -841,6 +843,7 @@ layers:
             draw:
                 polygons:
                     style: green-grid
+                    # style: circles-on-grid
                     color: [0.985,0.995,1.000]
                     visible: true
                 lines:
@@ -852,7 +855,7 @@ layers:
             filter: { kind: [forest, natural_forest, wood, natural_wood, natural_park], $zoom: { min: 10 }, not: { operator: "United States Forest Service" } }
             draw:
                 polygons:
-                    style: green-grid
+                    style: circles-on-grid-small
                     color: [0.985,0.995,1.000]
                     visible: true
                 lines:
@@ -889,6 +892,15 @@ layers:
                     polygons:
                         style: green-grid
                         visible: true
+
+        golf_course:
+            filter:
+                kind: golf_course
+            draw:
+                polygons:
+                    style: lines-on-grid
+                    color: [1.000,1.000,1.000]
+                    visible: true
 
     buildings:
         data: { source: mapzen, layer: buildings }
@@ -1112,21 +1124,21 @@ styles:
                         #endif
                     }
 
-    tools-tilecoords:
-        shaders:
-            blocks:
-                global: |
-                    // Varying to be added to both vertex and fragment shaders
-                    varying vec2 v_pos;
-                    #ifdef TANGRAM_FRAGMENT_SHADER
-                    vec2 TileCoords() {
-                        return fract(v_pos);
-                    }
-                    #endif
-                position: |
-                    v_pos = modelPosition().xy;
+    # tools-tilecoords:
+    #     shaders:
+    #         blocks:
+    #             global: |
+    #                 // Varying to be added to both vertex and fragment shaders
+    #                 varying vec2 v_pos;
+    #                 #ifdef TANGRAM_FRAGMENT_SHADER
+    #                 vec2 TileCoords() {
+    #                     return fract(v_pos);
+    #                 }
+    #                 #endif
+    #             position: |
+    #                 v_pos = modelPosition().xy;
     tools-grid:
-        mix: tools-tilecoords
+        mix: space-tile
         shaders:
             blocks:
                 global: |
@@ -1136,7 +1148,7 @@ styles:
                         return (grid.x < res * press) || (grid.y < res * press);
                     }
                     float TileGrid(float res) {
-                        vec2 st = TileCoords() * 100. * res;
+                        vec2 st = getTileCoords() * 100. * res;
                         float pct = 0.0;
                         float press = 0.3 + (1.0 - fract(u_map_position.z)) * 0.1;
                         if (grid(st, 0.1, press)) { pct += 0.5; }
@@ -1147,7 +1159,7 @@ styles:
                     }
                     #endif
     tools-grid2:
-        mix: tools-tilecoords
+        mix: space-tile
         shaders:
             blocks:
                 global: |
@@ -1157,7 +1169,7 @@ styles:
                         return (grid.x < res * press) || (grid.y < res * press);
                     }
                     float TileGrid(float res) {
-                        vec2 st = TileCoords() * 200. * res;
+                        vec2 st = getTileCoords() * 200. * res;
                         float pct = 0.0;
                         float press = 0.6 + (1.0 - fract(u_map_position.z)) * 0.1;
                         if (grid(st, 0.1, press)) { pct += 0.5; }
@@ -1169,7 +1181,7 @@ styles:
                     #endif
 
     tools-grid3:
-        mix: tools-tilecoords
+        mix: space-tile
         shaders:
             blocks:
                 global: |
@@ -1179,10 +1191,10 @@ styles:
                         return (grid.x < res * press) || (grid.y < res * press);
                     }
                     float TileGrid(float res) {
-                        vec2 st = TileCoords() * 400. * res;
+                        vec2 st = getTileCoords() * 400. * res;
                         float pct = 0.0;
                         float press = 0.9 + (1.0 - fract(u_map_position.z)) * 0.1;
-                        if (grid(st, 0.1, press)) { pct += 0.21; }
+                        if (grid(st, 0.1, press)) { pct += 0.3; }
                         return pct;
                     }
                     float TileGrid() {
@@ -1191,7 +1203,7 @@ styles:
                     #endif
 
     tools-grid4:
-        mix: tools-tilecoords
+        mix: space-tile
         shaders:
             blocks:
                 global: |
@@ -1201,7 +1213,7 @@ styles:
                         return (grid.x < res * press) || (grid.y < res * press);
                     }
                     float TileGrid(float res) {
-                        vec2 st = TileCoords() * 800. * res;
+                        vec2 st = getTileCoords() * 800. * res;
                         float pct = 0.0;
                         float press = 0.9 + (1.0 - fract(u_map_position.z)) * 0.1;
                         if (grid(st, 0.1, press)) { pct += 0.21; }
@@ -1251,6 +1263,105 @@ styles:
             blocks:
                 filter: |
                     color.rgb = mix(color.rgb, vec3(0.795,0.808,0.820), TileGrid());
+
+    circles-on-grid:
+        base: polygons
+        mix: [tools-grid2, space-tile, tiling-brick, tiling-tile, shapes-circle]
+        shaders:
+            defines:
+                DOTS_SCALE: 10.
+                DOTS_SIZE: 0.75
+                STROKE: .1 # stroke width
+            uniforms:
+                u_shape_color: [0.684,0.702,0.720]
+            blocks:
+                color: |
+                    color.rgb = mix(
+                        color.rgb,
+                        u_shape_color,
+                        stroke(
+                            DOTS_SIZE,
+                            circleDF(
+                                // change this vec2 to control circle offset
+                                vec2(.2, .2) -
+                                tile(getTileCoords() * DOTS_SCALE, 2.)
+                            )
+                        )
+                    );
+                    color.rgb = mix(color.rgb, u_shape_color, TileGrid());
+
+    circles-on-grid-small:
+        base: polygons
+        mix: [tools-grid3, space-tile, tiling-brick, tiling-tile, shapes-circle]
+        shaders:
+            defines:
+                DOTS_SCALE: 10.
+                DOTS_SIZE: 0.75
+                STROKE: .2 # stroke width
+            uniforms:
+                u_shape_color: [0.684,0.702,0.720]
+            blocks:
+                color: |
+                    color.rgb = mix(
+                        color.rgb,
+                        u_shape_color,
+                        stroke(
+                            DOTS_SIZE,
+                            circleDF(
+                                // change this vec2 to control circle offset
+                                vec2(.2, .2) -
+                                tile(getTileCoords() * DOTS_SCALE, 4.)
+                            )
+                        )
+                    );
+                    color.rgb = mix(color.rgb, u_shape_color, TileGrid());
+
+    lines-on-grid:
+        base: polygons
+        mix: [tools-grid3, space-tile, tiling-brick, tiling-tile, shapes-circle]
+        # animated: true
+        shaders:
+            defines:
+                DASH_SCALE: 10.
+                DASH_WIDTH: 0.005 # controls dash stroke width
+                PI: 3.14159
+            uniforms:
+                u_shape_color: [0.684,0.702,0.720]
+            blocks:
+                global: |
+                    mat2 rotate2D (float angle) {
+                        return mat2(cos(angle),-sin(angle),
+                                    sin(angle),cos(angle));
+                    }
+
+                    vec2 rotate2D (vec2 st, float a) {
+                        return (rotate2D(a)*(st-.5))+.5;
+                    }
+
+                    float dashDF(vec2 st) {
+                        return min(
+                            cos((st.x - st.y) * PI),
+                            -cos((st.x + st.y) * PI) * 5.
+                        );
+                    }
+                color: |
+                    color.rgb = mix(
+                        color.rgb,
+                        u_shape_color,
+                        fill(
+                            DASH_WIDTH,
+                            1. - dashDF(
+                                rotate2D(tile(
+                                    getTileCoords() * DASH_SCALE, 4.),
+                                    0. // angle
+                                    // use this to animate scale and angle (set animated: true)
+                                    // getTileCoords() * DASH_SCALE *(sin(u_time)+1.)*.5, 2.),
+                                    // u_time
+                                )
+                            )
+                        )
+                    );
+                    color.rgb = mix(color.rgb, u_shape_color, TileGrid());
 
     polygons-diagonal-grid:
         doc:
@@ -1393,3 +1504,159 @@ styles:
                 position: |
                     // Normalize the attribute position of a vertex
                     v_pos = modelPosition().xyz;
+
+    tiling-brick:
+        doc:
+            author:
+                name: Patricio Gonzalez Vivo
+                twitter: patriciogv
+            version: 0.0.1
+            tangram-version: 0.0.7
+            licence: MIT
+            description: |
+                Repeats a coordinate space (`vec2 st`) in diferent brick-like tiles N times (`float zoom`). For more information about tilling patterns read [this chapter of The Book of Shaders](https://thebookofshaders.com/09/)
+            examples:
+                nursery:
+                    url: https://tangrams.github.io/tangram-sandbox/styles/nursery.yaml
+                    img: https://tangrams.github.io/tangram-sandbox/styles/nursery.png
+                    lines: 99
+                patterns:
+                    url: https://tangrams.github.io/tangram-sandbox/styles/patterns.yaml
+                    img: https://tangrams.github.io/tangram-sandbox/styles/patterns.png
+                    lines: 130
+        test:
+            brick: { blocks: { color: "    color.rg += brick(v_texcoord.xy,5.);" } }
+        shaders:
+            blocks:
+                global: |
+                    vec2 brick (vec2 st, float zoom) {
+                        st *= zoom;
+                        // Here is where the offset is happening
+                        st.x += step(1., mod(st.y,2.0)) * 0.5;
+                        return fract(st);
+                    }
+
+    tiling-tile:
+        doc:
+            author:
+                name: Patricio Gonzalez Vivo
+                twitter: patriciogv
+            version: 0.0.1
+            tangram-version: 0.0.7
+            licence: MIT
+            description: |
+                Repeats a coordinate space (`vec2 st`) in diferent brick-like tiles N times (`float zoom`). For more information about tilling patterns read [this chapter of The Book of Shaders](https://thebookofshaders.com/09/)
+        test:
+            tile: { blocks: { color: "    color.rg += tile(v_texcoord.xy,5.);" } }
+        shaders:
+            blocks:
+                global: |
+                    // Repeats a coordinate space (st) in diferent tiles
+                    // ================================
+                    vec2 tile (vec2 st, float zoom) {
+                        st *= zoom;
+                        return fract(st);
+                    }
+
+    shapes-circle:
+        doc:
+            author:
+                name: Patricio Gonzalez Vivo
+                twitter: patriciogv
+            version: 0.0.1
+            tangram-version: 0.0.7
+            licence: MIT
+            description: |
+                Collection of functions to draw circles. To learn more about how to make shapes on shaders go to From check [this chapter about shapes from the Book of Shaders](https://thebookofshaders.com/07/)
+            examples:
+                lego:
+                    url: https://tangrams.github.io/tangram-sandbox/styles/lego.yaml
+                    img: https://tangrams.github.io/tangram-sandbox/styles/lego.png
+                    lines: 109-110
+                patterns:
+                    url: https://tangrams.github.io/tangram-sandbox/styles/patterns.yaml
+                    img: https://tangrams.github.io/tangram-sandbox/styles/patterns.png
+                    lines: 146
+                nursery:
+                    url: https://tangrams.github.io/tangram-sandbox/styles/nursery.yaml
+                    img: https://tangrams.github.io/tangram-sandbox/styles/nursery.png
+                    lines: 146
+        test:
+            circleDF: { blocks: { color: "    color.rgb += circleDF(v_texcoord.xy-.5);" } }
+            circle: { blocks: { color: "    color.rgb += circle(v_texcoord.xy,.5);" } }
+            circleBorder: { blocks: { color: "    color.rgb += circleBorder(v_texcoord.xy,.5);" } }
+
+        mix: [shapes-type]
+        shaders:
+            blocks:
+                global: |
+                    // get distance field of a Circle
+                    // ================================
+                    float circleDF (vec2 st) {
+                        return dot(st,st)*3.03;
+                    }
+                    //
+                    // Draw a circle in the middle of the ST space
+                    // ================================
+                    float circle (vec2 st, float radius) {
+                        return fill(radius, circleDF(st-vec2(0.5)));
+                    }
+                    //
+                    // Draw a circle in the middle of the ST space
+                    // ================================
+                    float circleBorder (vec2 st, float radius) {
+                        return stroke(radius, circleDF(st-vec2(0.5)));
+                    }
+
+    shapes-type:
+        doc:
+            author:
+                name: Patricio Gonzalez Vivo
+                twitter: patriciogv
+            version: 0.0.1
+            tangram-version: 0.0.7
+            licence: MIT
+            description: |
+                This block provides to functions `fill` and `stroke`. Each one transform a SDF to a fill shape or a stroke shape (border). The stroke width can be control with the define `STROKE`.
+                To learn more about how to make shapes on shaders go to From check [this chapter about shapes from the Book of Shaders](https://thebookofshaders.com/07/)
+        mix: [functions-aastep]
+        shaders:
+            defines:
+                STROKE: 0.15
+            blocks:
+                global: |
+                    float fill (in float size, in float x) {
+                        return 1.-aastep(size, x);
+                    }
+                    float stroke (in float size, in float x) {
+                        return aastep(size, x+STROKE*.5) - aastep(size, x-STROKE*.5);
+                    }
+
+    functions-aastep:
+        doc:
+            author:
+                name: Matt DesLauriers
+                twitter: mattdesl
+            version: 0.0.1
+            tangram-version: 0.0.7
+            licence: MIT
+            description: |
+                AnitAliased ```step()``` function implemented by [Matt DesLauriers](https://twitter.com/mattdesl) in this module <https://github.com/stackgl/glsl-aastep>
+        shaders:
+            extensions: OES_standard_derivatives
+            blocks:
+                global: |
+                    // AntiAliased Step function
+                    //=============================
+                    float aastep(float threshold, float value) {
+                        #ifdef TANGRAM_FRAGMENT_SHADER
+                            #ifdef TANGRAM_EXTENSION_OES_standard_derivatives
+                                float afwidth = length(vec2(dFdx(value), dFdy(value))) * 0.70710678118654757;
+                                return smoothstep(threshold-afwidth, threshold+afwidth, value);
+                            #else
+                                return step(threshold, value);
+                            #endif
+                        #else
+                            return step(threshold, value);
+                        #endif
+                    }
