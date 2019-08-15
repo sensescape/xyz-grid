@@ -1,5 +1,8 @@
 ![GRAPHIC SERIES](https://raw.githubusercontent.com/sensescape/xyz-grid/master/images/grid-title2.jpg)
 
+### Tokyo
+[https://sensescape.github.io/xyz-grid/#16/35.6844/139.7531](https://sensescape.github.io/xyz-grid/#16/35.6844/139.7531)
+
 ### Paris
 [https://sensescape.github.io/xyz-grid/#15/48.8656/2.3195](https://sensescape.github.io/xyz-grid/#15/48.8656/2.3195)
 
