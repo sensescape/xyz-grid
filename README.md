@@ -9,6 +9,9 @@
 ### London
 [https://sensescape.github.io/xyz-grid/#11/51.5080/-0.1168](https://sensescape.github.io/xyz-grid/#11/51.5080/-0.1168)
 
+### Copenhagen
+[https://sensescape.github.io/xyz-grid/#15/55.6900/12.5824](https://sensescape.github.io/xyz-grid/#15/55.6900/12.5824)
+
 ![GRID](https://raw.githubusercontent.com/sensescape/xyz-grid/master/images/xyz-grid-map2.png)
 [https://sensescape.github.io/xyz-grid/#17/48.87744/2.27802](https://sensescape.github.io/xyz-grid/#17/51.49505/-0.49509)
 
