@@ -6,6 +6,9 @@
 ### Paris
 [https://sensescape.github.io/xyz-grid/#15/48.8656/2.3195](https://sensescape.github.io/xyz-grid/#15/48.8656/2.3195)
 
+### London
+[https://sensescape.github.io/xyz-grid/#11/51.5080/-0.1168](https://sensescape.github.io/xyz-grid/#11/51.5080/-0.1168)
+
 [https://explore.xyz.here.com](https://explore.xyz.here.com)
 
 ![GRID](https://raw.githubusercontent.com/sensescape/xyz-grid/master/images/xyz-grid-map1.png)
