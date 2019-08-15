@@ -1,9 +1,10 @@
 ![GRAPHIC SERIES](https://raw.githubusercontent.com/sensescape/xyz-grid/master/images/grid-title2.jpg)
 
+[https://explore.xyz.here.com](https://explore.xyz.here.com)
+
 ![GRID](https://raw.githubusercontent.com/sensescape/xyz-grid/master/images/xyz-grid-map1.png)
 [https://sensescape.github.io/xyz-grid/#17/48.87744/2.27802](https://sensescape.github.io/xyz-grid/#17/48.87744/2.27802)
 
-[https://explore.xyz.here.com](https://explore.xyz.here.com)
 
 ### To run locally:
 
