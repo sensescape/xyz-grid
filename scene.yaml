@@ -1028,7 +1028,7 @@ layers:
                         order: global.feature_order
                         # style: lines-dots
                         color: global.extralight_color
-                        width: [[1, 0.5px], [9, 3px], [17,14m]]
+                        width: [[1, 0.5px], [9, 2.5px], [17,14m]]
 
         region:
             filter:
@@ -1039,7 +1039,7 @@ layers:
                 lines:
                     color: global.lighter_color
                     # width: [[0, 0.5px], [9, 2px], [14, 4px], [16, 6.5px], [17, 16m]]
-                    width: [[0, 0.5px], [14, 2px], [16, 7px], [17, 12m]]
+                    width: [[0, 0.5px], [14, 2px], [16, 5px], [17, 12m]]
 
             water:
                 filter: { maritime_boundary: true }
@@ -1320,7 +1320,7 @@ styles:
                         vec2 st = getTileCoords() * 200. * res;
                         float pct = 0.0;
                         float press = 0.6 + (1.0 - fract(u_map_position.z)) * 0.1;
-                        if (grid(st, 0.1, press)) { pct += 0.175; }
+                        if (grid(st, 0.1, press)) { pct += 0.2; }
                         return pct;
                     }
                     float TileGrid() {
@@ -1342,7 +1342,7 @@ styles:
                         vec2 st = getTileCoords() * 400. * res;
                         float pct = 0.0;
                         float press = 0.9 + (1.0 - fract(u_map_position.z)) * 0.1;
-                        if (grid(st, 0.1, press)) { pct += 0.1; }
+                        if (grid(st, 0.1, press)) { pct += 0.175; }
                         return pct;
                     }
                     float TileGrid() {
