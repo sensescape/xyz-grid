@@ -21,16 +21,40 @@ global:
 
     text_font_family: 'Orbitron'
 
-    black_color:                  [0.790,0.790,0.790]
-    dark_color:                   [0.810,0.810,0.810]
-    mid_color:                    [0.830,0.830,0.830]
-    midlight_color:               [0.850,0.850,0.850]
-    extralight_color:             [0.870,0.870,0.870]
-    light_color:                  [0.890,0.890,0.890]
-    lighter_color:                [0.910,0.910,0.910]
-    lightest_color:               [0.929,0.929,0.929]
-    ultralight_color:             [0.965,0.965,0.965]
-    offwhite_color:               [0.976,0.976,0.976]
+    # black_color:                  [0.840,0.840,0.840]
+    # dark_color:                   [0.850,0.850,0.850]
+    # mid_color:                    [0.860,0.860,0.860]
+    # midlight_color:               [0.870,0.870,0.870]
+    # extralight_color:             [0.880,0.880,0.880]
+    # light_color:                  [0.890,0.890,0.890]
+    # lighter_color:                [0.910,0.910,0.910]
+    # lightest_color:               [0.929,0.929,0.929]
+    # ultralight_color:             [0.965,0.965,0.965]
+    # offwhite_color:               [0.976,0.976,0.976]
+    # white_color:                  [1.000,1.000,1.000]
+
+    # black_color:                  [0.759,0.798,0.843]
+    # dark_color:                   [0.765,0.805,0.850]
+    # mid_color:                    [0.774,0.814,0.860]
+    # midlight_color:               [0.783,0.824,0.870]
+    # extralight_color:             [0.792,0.833,0.880]
+    # light_color:                  [0.801,0.843,0.890]
+    # lighter_color:                [0.810,0.852,0.900]
+    # lightest_color:               [0.819,0.861,0.910]
+    # ultralight_color:             [0.846,0.890,0.940]
+    # offwhite_color:               [0.873,0.918,0.970]
+    # white_color:                  [1.000,1.000,1.000]
+
+    black_color:                  [0.773,0.804,0.840]
+    dark_color:                   [0.782,0.814,0.850]
+    mid_color:                    [0.791,0.823,0.860]
+    midlight_color:               [0.800,0.833,0.870]
+    extralight_color:             [0.810,0.842,0.880]
+    light_color:                  [0.819,0.852,0.890]
+    lighter_color:                [0.828,0.862,0.900]
+    lightest_color:               [0.837,0.871,0.910]
+    ultralight_color:             [0.865,0.900,0.940]
+    offwhite_color:               [0.892,0.929,0.970]
     white_color:                  [1.000,1.000,1.000]
 
 # Fonts
@@ -797,7 +821,7 @@ layers:
                     color: [0.985,0.995,1.000]
                     visible: true
                 lines:
-                    color: [0.825,0.837,0.850]
+                    color: [0.865,0.902,0.920]
                     width: 2px
                     visible: true
             us_national_park:
@@ -813,7 +837,7 @@ layers:
                         color: [0.985,0.995,1.000]
                         visible: true
                     lines:
-                        color: [0.825,0.837,0.850]
+                        color: [0.865,0.902,0.920]
                         width: 2px
                         visible: true
 
@@ -829,7 +853,7 @@ layers:
                     color: [0.985,0.995,1.000]
                     visible: true
                 lines:
-                    color: [0.825,0.837,0.850]
+                    color: [0.865,0.902,0.920]
                     width: 2px
                     visible: true
 
@@ -847,7 +871,7 @@ layers:
                     color: [0.985,0.995,1.000]
                     visible: true
                 lines:
-                    color: [0.825,0.837,0.850]
+                    color: [0.865,0.902,0.920]
                     width: 2px
                     visible: true
 
@@ -859,7 +883,7 @@ layers:
                     color: [0.985,0.995,1.000]
                     visible: true
                 lines:
-                    color: [0.825,0.837,0.850]
+                    color: [0.865,0.902,0.920]
                     width: 2px
                     visible: true
 
@@ -879,7 +903,7 @@ layers:
                     color: [0.985,0.995,1.000]
                     visible: true
                 lines:
-                    color: [0.825,0.837,0.850]
+                    color: [0.865,0.902,0.920]
                     width: 2px
                     visible: true
             national_park:
@@ -899,7 +923,11 @@ layers:
             draw:
                 polygons:
                     style: lines-on-grid
-                    color: [1.000,1.000,1.000]
+                    color: [0.985,0.995,1.000]
+                    visible: true
+                lines:
+                    color: [0.865,0.902,0.920]
+                    width: 2px
                     visible: true
 
     buildings:
@@ -932,8 +960,9 @@ layers:
                     style: building-grid
                 lines:
                     visible: true
-                    color: [0.648,0.684,0.720]
-                    width: [[12,0.5px], [14,2px]]
+                    # color: [0.648,0.684,0.720]
+                    color: [0.684,0.719,0.760]
+                    width: [[12,0.5px], [16,2px]]
 
     places:
         data: { source: mapzen, layer: places }
@@ -1172,7 +1201,7 @@ styles:
                         vec2 st = getTileCoords() * 200. * res;
                         float pct = 0.0;
                         float press = 0.6 + (1.0 - fract(u_map_position.z)) * 0.1;
-                        if (grid(st, 0.1, press)) { pct += 0.5; }
+                        if (grid(st, 0.1, press)) { pct += 0.175; }
                         return pct;
                     }
                     float TileGrid() {
@@ -1194,7 +1223,7 @@ styles:
                         vec2 st = getTileCoords() * 400. * res;
                         float pct = 0.0;
                         float press = 0.9 + (1.0 - fract(u_map_position.z)) * 0.1;
-                        if (grid(st, 0.1, press)) { pct += 0.3; }
+                        if (grid(st, 0.1, press)) { pct += 0.1; }
                         return pct;
                     }
                     float TileGrid() {
@@ -1230,7 +1259,7 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    color.rgb = mix(color.rgb, vec3(0.684,0.702,0.720), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.704,0.722,0.740), TileGrid());
 
     water-grid:
         base: polygons
@@ -1246,7 +1275,7 @@ styles:
         shaders:
             blocks:
                 filter: |
-                    color.rgb = mix(color.rgb, vec3(0.161,0.207,0.230), TileGrid());
+                    color.rgb = mix(color.rgb, vec3(0.216,0.272,0.300), TileGrid());
 
     park-grid:
         base: polygons
@@ -1271,9 +1300,9 @@ styles:
             defines:
                 DOTS_SCALE: 10.
                 DOTS_SIZE: 0.75
-                STROKE: .1 # stroke width
+                STROKE: .075 # stroke width
             uniforms:
-                u_shape_color: [0.684,0.702,0.720]
+                u_shape_color: [0.692,0.737,0.760]
             blocks:
                 color: |
                     color.rgb = mix(
@@ -1299,7 +1328,7 @@ styles:
                 DOTS_SIZE: 0.75
                 STROKE: .2 # stroke width
             uniforms:
-                u_shape_color: [0.684,0.702,0.720]
+                u_shape_color: [0.692,0.737,0.760]
             blocks:
                 color: |
                     color.rgb = mix(
@@ -1326,7 +1355,7 @@ styles:
                 DASH_WIDTH: 0.005 # controls dash stroke width
                 PI: 3.14159
             uniforms:
-                u_shape_color: [0.684,0.702,0.720]
+                u_shape_color: [0.692,0.737,0.760]
             blocks:
                 global: |
                     mat2 rotate2D (float angle) {
